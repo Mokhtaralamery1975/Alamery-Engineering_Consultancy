@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل صب الخرسانة</title>
+    <style>
+        body { font-family: Arial, sans-serif; direction: rtl; text-align: right; padding: 20px; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; }
+        input, button { padding: 5px; width: 100%; max-width: 300px; }
+        #notifications { color: green; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <h2>تسجيل عملية الصب</h2>
+    <div class="form-group">
+        <label for="projectName">اسم المشروع:</label>
+        <input type="text" id="projectName" required>
+    </div>
+    <div class="form-group">
+        <label for="castDate">تاريخ الصب (يوم/شهر/سنة):</label>
+        <input type="date" id="castDate" required>
+    </div>
+    <button onclick="scheduleTests()">تسجيل وجدولة الاختبارات</button>
+    <div id="notifications"></div>
+
+    <script>
+        function scheduleTests() {
+            const projectName = document.getElementById('projectName').value;
+            const castDate = new Date(document.getElementById('castDate').value);
+            if (!projectName || !castDate) {
+                alert("يرجى ملء جميع الحقول!");
+                return;
+            }
+
+            const intervals = [7, 14, 28]; // أيام
+            let message = `تم تسجيل المشروع: ${projectName}<br>تنبيهات الاختبارات:<br>`;
+            intervals.forEach(days => {
+                const testDate = new Date(castDate);
+                testDate.setDate(castDate.getDate() + days);
+                message += `اختبار بعد ${days} أيام: ${testDate.toLocaleDateString('ar-EG')}<br>`;
+                // ملاحظة: التنبيهات الحقيقية تتطلب نظام إشعارات، وهنا نقدم رسالة فقط
+                alert(`تنبيه: اختبار ${projectName} بعد ${days} أيام في ${testDate.toLocaleDateString('ar-EG')}`);
+            });
+            document.getElementById('notifications').innerHTML = message;
+        }
+    </script>
+</body>
+</html>
