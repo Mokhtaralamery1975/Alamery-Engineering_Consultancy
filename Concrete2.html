@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل صب الخرسانة</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            direction: rtl;
+            text-align: right;
+            padding: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input, button {
+            padding: 5px;
+            width: 100%;
+            max-width: 300px;
+        }
+        #notifications {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .success {
+            color: green;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>تسجيل عملية الصب</h2>
+    <div class="form-group">
+        <label for="projectName">اسم المشروع:</label>
+        <input type="text" id="projectName" required>
+    </div>
+    <div class="form-group">
+        <label for="castDate">تاريخ الصب (يوم/شهر/سنة):</label>
+        <input type="date" id="castDate" required>
+    </div>
+    <button onclick="scheduleTests()">تسجيل وجدولة الاختبارات</button>
+    <button onclick="clearForm()">مسح المدخلات</button>
+    
+    <div id="notifications"></div>
+
+    <script>
+        function scheduleTests() {
+            const projectName = document.getElementById('projectName').value.trim();
+            const castDateInput = document.getElementById('castDate').value;
+            
+            if (!projectName || !castDateInput) {
+                displayMessage("يرجى ملء جميع الحقول!", "error");
+                return;
+            }
+
+            const castDate = new Date(castDateInput);
+            if (isNaN(castDate)) {
+                displayMessage("تاريخ الصب غير صالح!", "error");
+                return;
+            }
+
+            const intervals = [7, 14, 28]; // الأيام للاختبارات
+            let message = `✅ تم تسجيل المشروع: ${projectName}<br>📅 تنبيهات الاختبارات:<br>`;
+
+            intervals.forEach(days => {
+                const testDate = new Date(castDate);
+                testDate.setDate(castDate.getDate() + days);
+                const formattedDate = testDate.toLocaleDateString('ar-EG');
+                message += `- اختبار بعد ${days} يوم: ${formattedDate}<br>`;
+
+                // تخزين الإشعارات في LocalStorage
+                localStorage.setItem(`${projectName}_test_${days}`, formattedDate);
+            });
+
+            displayMessage(message, "success");
+        }
+
+        function displayMessage(msg, type) {
+            const notificationDiv = document.getElementById('notifications');
+            notificationDiv.innerHTML = msg;
+            notificationDiv.className = type;
+        }
+
+        function clearForm() {
+            document.getElementById('projectName').value = "";
+            document.getElementById('castDate').value = "";
+            document.getElementById('notifications').innerHTML = "";
+        }
+    </script>
+
+</body>
+</html>
