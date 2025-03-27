@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مشاريعنا - المكتب الهندسي العامري</title>
+    <meta name="description" content="استعرض مشاريع المكتب الهندسي العامري المتنوعة في مجالات التصميم المعماري والهندسي">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Font Awesome للأيقونات -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- الهيدر -->
+    <header class="header">
+        <div class="container header-container">
+            <div class="logo">
+                <img src="images/logo.png" alt="شعار المكتب الهندسي العامري" onerror="this.src='https://via.placeholder.com/50x50?text=LOGO'">
+                <span class="logo-text">المكتب الهندسي العامري</span>
+            </div>
+            
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">الرئيسية</a></li>
+                    <li><a href="about.html" class="nav-link">من نحن</a></li>
+                    <li><a href="services.html" class="nav-link">خدماتنا</a></li>
+                    <li><a href="projects.html" class="nav-link">مشاريعنا</a></li>
+                    <li><a href="team.html" class="nav-link">فريق العمل</a></li>
+                    <li><a href="contact.html" class="nav-link">اتصل بنا</a></li>
+                </ul>
+            </nav>
+            
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- عنوان الصفحة -->
+    <section class="hero" style="padding: 80px 0;">
+        <div class="container">
+            <h1 class="hero-title">مشاريعنا</h1>
+            <p class="hero-subtitle">نفخر بتقديم مجموعة متنوعة من المشاريع التي تعكس خبرتنا وإبداعنا في مجال التصميم الهندسي</p>
+        </div>
+    </section>
+
+    <!-- قسم المشاريع -->
+    <section class="section projects">
+        <div class="container">
+            <!-- فلاتر المشاريع -->
+            <div class="project-filters">
+                <button class="filter-btn" data-filter="all">الكل</button>
+                <button class="filter-btn" data-filter="سكني">سكني</button>
+                <button class="filter-btn" data-filter="تجاري">تجاري</button>
+                <button class="filter-btn" data-filter="صحي">صحي</button>
+                <button class="filter-btn" data-filter="تعليمي">تعليمي</button>
+                <button class="filter-btn" data-filter="حكومي">حكومي</button>
+            </div>
+            
+            <div class="projects-grid">
+                <!-- مشروع 1 -->
+                <div class="project-card" data-category="سكني">
+                    <div class="project-image">
+                        صورة المشروع
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>سكني | الرياض</span>
+                        </div>
+                        <h3 class="project-title">برج السلام السكني</h3>
+                        <p class="project-description">
+                            برج سكني فاخر يتكون من 20 طابقاً، يجمع بين الفخامة والراحة مع إطلالات بانورامية على المدينة.
+                        </p>
+                        <a href="project-details.html?id=1" class="project-link">
+                            <i class="fas fa-arrow-left"></i>
+                            تفاصيل المشروع
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- مشروع 2 -->
+                <div class="project-card" data-category="تجاري">
+                    <div class="project-image">
+                        صورة المشروع
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>تجاري | جدة</span>
+                        </div>
+                        <h3 class="project-title">مجمع الواحة التجاري</h3>
+                        <p class="project-description">
+                            مجمع تجاري عصري يضم محلات تجارية ومطاعم ومساحات ترفيهية، بتصميم يجمع بين الحداثة والأصالة.
+                        </p>
+                        <a href="project-details.html?id=2" class="project-link">
+                            <i class="fas fa-arrow-left"></i>
+                            تفاصيل المشروع
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- مشروع 3 -->
+                <div class="project-card" data-category="صحي">
+                    <div class="project-image">
+                        صورة المشروع
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>صحي | الدمام</span>
+                        </div>
+                        <h3 class="project-title">مستشفى الشفاء التخصصي</h3>
+                        <p class="project-description">
+                            مستشفى حديث بسعة 200 سرير، مصمم وفق أحدث المعايير العالمية لتوفير بيئة علاجية متكاملة ومريحة.
+                        </p>
+                        <a href="project-details.html?id=3" class="project-link">
+                            <i class="fas fa-arrow-left"></i>
+                            تفاصيل المشروع
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- مشروع 4 -->
+                <div class="project-card" data-category="تعليمي">
+                    <div class="project-image">
+                        صورة المشروع
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>تعليمي | الرياض</span>
+                        </div>
+                        <h3 class="project-title">مدرسة المستقبل النموذجية</h3>
+                        <p class="project-description">
+                            مدرسة حديثة تضم مرافق تعليمية متطورة ومساحات تفاعلية، مصممة لتوفير بيئة تعليمية محفزة للإبداع والابتكار.
+                        </p>
+                        <a href="project-details.html?id=4" class="project-link">
+                            <i class="fas fa-arrow-left"></i>
+                            تفاصيل المشروع
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- مشروع 5 -->
+                <div class="project-card" data-category="حكومي">
+                    <div class="project-image">
+                        صورة المشروع
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>حكومي | الرياض</span>
+                        </div>
+                        <h3 class="project-title">مبنى الإدارة العامة للتخطيط</h3>
+                        <p class="project-description">
+                            مبنى إداري حكومي يجمع بين الأصالة والحداثة، مصمم وفق أعلى معايير الاستدامة وكفاءة استخدام الطاقة.
+                        </p>
+                        <a href="project-details.html?id=5" class="project-link">
+                            <i class="fas fa-arrow-left"></i>
+                            تفاصيل المشروع
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- مشروع 6 -->
+                <div class="project-card" data-category="سكني">
+                    <div class="project-image">
+                        صورة المشروع
+                    </div>
+                    <div class="project-content">
+                        <div class="project-category">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>سكني | جدة</span>
+                        </div>
+                        <h3 class="project-title">مجمع الأندلس السكني</h3>
+                        <p class="project-description">
+                            مجمع سكني متكامل يضم فلل وشقق فاخرة، مع مرافق خدمية ومساحات خضراء، مصمم لتوفير بيئة سكنية مثالية.
+                        </p>
+                        <a href="project-details.html?id=6" class="project-link">
+                            <i class="fas fa-arrow-left"></i>
+                            تفاصيل المشروع
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- الفوتر -->
+    <footer class="footer">
+        <div class="container footer-container">
+            <div class="footer-col">
+                <div class="footer-logo">المكتب الهندسي العامري</div>
+                <p class="footer-description">
+                    نقدم خدمات هندسية متكاملة بأعلى معايير الجودة والإبداع، ملتزمين بتحقيق رؤية عملائنا وتجاوز توقعاتهم.
+                </p>
+            </div>
+            
+            <div class="footer-col">
+                <h3 class="footer-title">روابط سريعة</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html" class="footer-link">الرئيسية</a></li>
+                    <li><a href="about.html" class="footer-link">من نحن</a></li>
+                    <li><a href="services.html" class="footer-link">خدماتنا</a></li>
+                    <li><a href="projects.html" class="footer-link">مشاريعنا</a></li>
+                    <li><a href="team.html" class="footer-link">فريق العمل</a></li>
+                    <li><a href="contact.html" class="footer-link">اتصل بنا</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h3 class="footer-title">خدماتنا</h3>
+                <ul class="footer-links">
+                    <li><a href="services.html#architectural" class="footer-link">التصميم المعماري</a></li>
+                    <li><a href="services.html#interior" class="footer-link">التصميم الداخلي</a></li>
+                    <li><a href="services.html#supervision" class="footer-link">الإشراف الهندسي</a></li>
+                    <li><a href="services.html#consulting" class="footer-link">الاستشارات الهندسية</a></li>
+                    <li><a href="services.html#management" class="footer-link">إدارة المشاريع</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h3 class="footer-title">معلومات التواصل</h3>
+                <ul class="footer-links">
+                    <li class="footer-contact-item">
+                        <i class="fas fa-map-marker-alt footer-contact-icon"></i>
+                        <span>شارع الملك فهد، حي الورود، الرياض</span>
+                    </li>
+                    <li class="footer-contact-item">
+                        <i class="fas fa-phone footer-contact-icon"></i>
+                        <span>+966 11 234 5678</span>
+                    </li>
+                    <li class="footer-contact-item">
+                        <i class="fas fa-envelope footer-contact-icon"></i>
+                        <span>info@alamriengineering.com</span>
+                    </li>
+                    <li class="footer-contact-item">
+                        <i class="fas fa-clock footer-contact-icon"></i>
+                        <span>الأحد - الخميس: 8:00 ص - 5:00 م</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2025 المكتب الهندسي العامري. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ملف الجافاسكريبت -->
+    <script src="js/main.js"></script>
+</body>
+</html>
