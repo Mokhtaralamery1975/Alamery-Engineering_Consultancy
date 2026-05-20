@@ -1,0 +1,17 @@
+<!doctype html><html lang='ar' dir='rtl'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>منشئ البرومبت</title><link rel='stylesheet' href='style.css'></head><body><header class='header'><div class='container header-wrap'><div class='brand'>منشئ البرومبت الذكي</div><nav class='nav'><a href='index.html'>الرئيسية</a><a class='active' href='generator.html'>التوليد</a><a href='result.html'>النتيجة</a></nav></div></header>
+<section class='section'><div class='container'><h2 class='title'>صفحة منشئ البرومبت</h2><form id='generatorForm' class='glass card form'>
+<div class='field'><label>اسم المشروع</label><input id='project' required><small>مثال: خريطة خدمات صنعاء</small></div>
+<div class='field'><label>المجال</label><select id='domain' required></select></div>
+<div class='field'><label>الهدف من البرومبت</label><input id='goal' required></div>
+<div class='field'><label>نوع المخرج المطلوب</label><input id='output' required></div>
+<div class='field'><label>المنصة</label><input id='platform' placeholder='ChatGPT / Gemini / Claude / Veo'></div>
+<div class='field'><label>الجمهور المستهدف</label><input id='audience'></div>
+<div class='field'><label>مستوى التفصيل</label><select id='detail'><option>موجز</option><option selected>متوسط</option><option>عالي</option></select></div>
+<div class='field'><label>اللغة المطلوبة</label><input id='lang' value='العربية الفصحى'></div>
+<div class='field full'><label>القيود أو الشروط الخاصة</label><textarea id='constraints'></textarea></div>
+<div class='field full'><label>البيانات المتوفرة لدى المستخدم</label><textarea id='data'></textarea></div>
+<div class='field'><label>صيغة الإخراج النهائية</label><input id='format' value='نص منسق + نقاط + جداول عند الحاجة'></div>
+<div class='field'><label>شرح أم إخراج مباشر؟</label><select id='explain'><option value='yes'>شرح + إخراج</option><option value='no'>إخراج مباشر فقط</option></select></div>
+<div class='field'><label>مراجع/تحقق من مصادر؟</label><select id='verify'><option value='yes'>نعم</option><option value='no'>لا</option></select></div>
+<div class='field full'><button class='btn gold' type='submit'>توليد البرومبت</button></div>
+</form></div></section><footer class='footer'>العامري  للاستشارات  الهندسية — Alamery  Engineering  Consultancies</footer><script src='main.js'></script></body></html>

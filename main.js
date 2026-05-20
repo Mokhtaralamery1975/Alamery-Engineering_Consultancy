@@ -1,203 +1,22 @@
-/*
- * المكتب الهندسي العامري - الوظائف الرئيسية
- * تاريخ الإنشاء: 27 مارس 2025
- */
-
-// انتظار تحميل المستند بالكامل
-document.addEventListener('DOMContentLoaded', function() {
-    // تفعيل القائمة المتنقلة
-    initMobileMenu();
-    
-    // تفعيل فلترة المشاريع
-    initProjectFilters();
-    
-    // تفعيل معرض الصور في صفحة تفاصيل المشروع
-    initGallery();
-    
-    // تفعيل نموذج التواصل
-    initContactForm();
-});
-
-// تفعيل القائمة المتنقلة
-function initMobileMenu() {
-    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-    const navMenu = document.querySelector('.nav-menu');
-    
-    if (mobileMenuBtn && navMenu) {
-        mobileMenuBtn.addEventListener('click', function() {
-            navMenu.classList.toggle('active');
-            mobileMenuBtn.classList.toggle('active');
-        });
-    }
-    
-    // إضافة الفئة النشطة للرابط الحالي
-    const currentLocation = window.location.pathname;
-    const navLinks = document.querySelectorAll('.nav-link');
-    
-    navLinks.forEach(link => {
-        const href = link.getAttribute('href');
-        if (currentLocation === href || (href !== '/' && currentLocation.startsWith(href))) {
-            link.classList.add('active');
-        }
-    });
-}
-
-// تفعيل فلترة المشاريع
-function initProjectFilters() {
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    const projectCards = document.querySelectorAll('.project-card');
-    
-    if (filterBtns.length && projectCards.length) {
-        filterBtns.forEach(btn => {
-            btn.addEventListener('click', function() {
-                // إزالة الفئة النشطة من جميع الأزرار
-                filterBtns.forEach(b => b.classList.remove('active'));
-                
-                // إضافة الفئة النشطة للزر المضغوط
-                this.classList.add('active');
-                
-                const filter = this.getAttribute('data-filter');
-                
-                // عرض/إخفاء المشاريع بناءً على الفلتر المحدد
-                projectCards.forEach(card => {
-                    if (filter === 'all') {
-                        card.style.display = 'block';
-                    } else {
-                        const category = card.getAttribute('data-category');
-                        if (category === filter) {
-                            card.style.display = 'block';
-                        } else {
-                            card.style.display = 'none';
-                        }
-                    }
-                });
-            });
-        });
-        
-        // تفعيل الفلتر الافتراضي (الكل)
-        const defaultFilter = document.querySelector('.filter-btn[data-filter="all"]');
-        if (defaultFilter) {
-            defaultFilter.classList.add('active');
-        }
-    }
-}
-
-// تفعيل معرض الصور في صفحة تفاصيل المشروع
-function initGallery() {
-    const galleryThumbs = document.querySelectorAll('.gallery-thumb');
-    const galleryMain = document.querySelector('.gallery-main');
-    
-    if (galleryThumbs.length && galleryMain) {
-        galleryThumbs.forEach(thumb => {
-            thumb.addEventListener('click', function() {
-                // إزالة الفئة النشطة من جميع الصور المصغرة
-                galleryThumbs.forEach(t => t.classList.remove('active'));
-                
-                // إضافة الفئة النشطة للصورة المصغرة المضغوطة
-                this.classList.add('active');
-                
-                // تحديث الصورة الرئيسية
-                const imgSrc = this.getAttribute('data-src');
-                const imgAlt = this.getAttribute('data-alt');
-                
-                if (imgSrc) {
-                    galleryMain.innerHTML = `<img src="${imgSrc}" alt="${imgAlt || 'صورة المشروع'}" />`;
-                } else {
-                    galleryMain.innerHTML = `<div class="placeholder">${this.innerHTML}</div>`;
-                }
-            });
-        });
-        
-        // تفعيل الصورة الأولى افتراضيًا
-        if (galleryThumbs.length > 0) {
-            galleryThumbs[0].classList.add('active');
-            
-            const imgSrc = galleryThumbs[0].getAttribute('data-src');
-            const imgAlt = galleryThumbs[0].getAttribute('data-alt');
-            
-            if (imgSrc) {
-                galleryMain.innerHTML = `<img src="${imgSrc}" alt="${imgAlt || 'صورة المشروع'}" />`;
-            }
-        }
-    }
-}
-
-// تفعيل نموذج التواصل
-function initContactForm() {
-    const contactForm = document.getElementById('contactForm');
-    
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // التحقق من صحة البيانات
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const subject = document.getElementById('subject').value;
-            const message = document.getElementById('message').value;
-            
-            let isValid = true;
-            let errorMessage = '';
-            
-            if (!name) {
-                isValid = false;
-                errorMessage = 'الرجاء إدخال الاسم الكامل';
-            } else if (!email) {
-                isValid = false;
-                errorMessage = 'الرجاء إدخال البريد الإلكتروني';
-            } else if (!validateEmail(email)) {
-                isValid = false;
-                errorMessage = 'الرجاء إدخال بريد إلكتروني صحيح';
-            } else if (!subject) {
-                isValid = false;
-                errorMessage = 'الرجاء اختيار الموضوع';
-            } else if (!message) {
-                isValid = false;
-                errorMessage = 'الرجاء إدخال رسالتك';
-            }
-            
-            const formMessage = document.querySelector('.form-message');
-            
-            if (!isValid) {
-                // عرض رسالة الخطأ
-                formMessage.textContent = errorMessage;
-                formMessage.classList.remove('success');
-                formMessage.classList.add('error');
-                formMessage.style.display = 'block';
-            } else {
-                // محاكاة إرسال النموذج
-                formMessage.textContent = 'تم إرسال رسالتك بنجاح! سنتواصل معك قريباً.';
-                formMessage.classList.remove('error');
-                formMessage.classList.add('success');
-                formMessage.style.display = 'block';
-                
-                // إعادة تعيين النموذج
-                contactForm.reset();
-                
-                // إخفاء رسالة النجاح بعد 5 ثوانٍ
-                setTimeout(() => {
-                    formMessage.style.display = 'none';
-                }, 5000);
-            }
-        });
-    }
-}
-
-// التحقق من صحة البريد الإلكتروني
-function validateEmail(email) {
-    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(String(email).toLowerCase());
-}
-
-// إضافة تأثيرات التمرير
-window.addEventListener('scroll', function() {
-    const header = document.querySelector('.header');
-    
-    if (header) {
-        if (window.scrollY > 50) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
-    }
+const BRAND='العامري للاستشارات الهندسية — Alamery Engineering Consultancies';
+const IMPORTANT='لضمان أعلى درجة ممكنة من الدقة وصحة الإخراج، يجب تزويد الذكاء الاصطناعي يدويًا بكل البيانات الموثقة المتاحة لديك قبل تنفيذ البرومبت أو ضمن نصه نفسه؛ لأن جودة المخرجات ترتبط مباشرة بجودة المدخلات، فالذكاء الاصطناعي — كأي نظام تحليلي أو برمجي — إذا بُنِي على بيانات صحيحة وموثقة ومنظمة، كانت نتائجه أقرب إلى الصحة والدقة والاعتمادية، أما إذا كانت البيانات ناقصة أو غير دقيقة أو غير موثقة، فإن المخرجات ستتأثر بذلك مهما كانت قوة النموذج.';
+const RIGHTS='هذا البرومبت من إعداد العامري  للاستشارات  الهندسية – Alamery Engineering Consultancies، وهو متاح للاستخدام الشخصي، والتعليمي، والأكاديمي، والعلمي، والخيري، والشرح فقط، مع وجوب ذكر المصدر عند الاستخدام. ويُمنع استخدامه تجاريًا أو ربحيًا، أو إعادة نشره بصياغة جديدة، أو بيعه، أو استخدامه لكسب المتابعين، أو إنهاء أعمال مهنية للغير، إلا بعد شرائه، والشراء متوفر حاليًا في الجمهورية  اليمنية فقط.';
+const domains=[['gis','GIS والخرائط'],['code','البرمجة'],['design','التصميم'],['research','الأبحاث الأكاديمية'],['video','الفيديو'],['eng','الهندسة'],['stats','التحليل الإحصائي'],['ppt','العروض التقديمية']];
+const templates=[
+'برومبت إنشاء خريطة GIS احترافية','برومبت إنشاء تطبيق ويب','برومبت تصميم بوستر دعائي','برومبت إعداد بحث أكاديمي','برومبت إنشاء فيديو سينمائي','برومبت فحص مخطط إنشائي','برومبت تحليل استبيان إحصائي','برومبت إنشاء عرض تقديمي PowerPoint'];
+function buildPrompt(v){
+const mapRules={gis:'ألزم النموذج بإخراج خريطة نهائية دقيقة تحتوي على سهم الشمال ومقياس رسم حقيقي وإطار إحداثيات والاعتماد على بيانات موثقة.',code:'ألزم النموذج ببنية ملفات واضحة وكود نظيف وواجهة حديثة وتعليمات تشغيل.',design:'ألزم النموذج بتحديد المقاس والألوان والعناصر والنصوص والهوية البصرية.',research:'ألزم النموذج بمصادر حقيقية وعدم اختراع مراجع والتمييز بين المؤكد والاستنتاج.',video:'ألزم النموذج بوصف المشهد والكاميرا والإضاءة والحركة والشخصيات والزمن والمؤثرات.',eng:'ألزم النموذج بتحليل هندسي واضح وعدم الادعاء بالدقة التنفيذية دون بيانات كاملة.',stats:'ألزم النموذج بمنهج تحليل إحصائي واضح واختبار الفرضيات وتفسير النتائج إداريًا.',ppt:'ألزم النموذج ببناء عرض شرائحي منطقي بعناوين ورسوم وتوصيات ختامية.'};
+return `${BRAND}\n\nاسم البرومبت: ${v.project} | Prompt Name: ${v.project}\nوظيفة البرومبت: ${v.goal}\nالمنصة الأنسب: ${v.platform}\n\nطريقة الاستخدام:\n1) انسخ البرومبت كما هو.\n2) أرفق بياناتك الموثقة: ${v.data}.\n3) راجع المخرجات قبل الاعتماد النهائي.\n\nتنبيه مهم:\n${IMPORTANT}\n\nتحذير حقوقي:\n${RIGHTS}\n\nالبرومبت الكامل الجاهز:\nأنت خبير ضمن منهج Alamery Engineering Consultancies Prompting Method.\nالمشروع: ${v.project}. المجال: ${v.domain}. الهدف: ${v.goal}. الجمهور: ${v.audience}.\nمستوى التفصيل: ${v.detail}. اللغة: ${v.lang}. صيغة الإخراج: ${v.format}.\nالقيود: ${v.constraints}. المخرج المطلوب: ${v.output}.\n${mapRules[v.domainKey]||''}\n${v.verify==='yes'?'اعتمد على مصادر موثوقة واذكر درجة اليقين لكل معلومة.':'قدّم إخراجًا عمليًا مباشرًا مع الإشارة للحدود.'}\n${v.explain==='yes'?'اشرح خطواتك بإيجاز قبل الإخراج النهائي.':'قدّم الإخراج النهائي مباشرة دون شرح مطول.'}\nوقّع النتيجة بعبارة: ${BRAND}.\n\n— ${BRAND}`}
+function saveFav(text){const a=JSON.parse(localStorage.getItem('favs')||'[]');a.unshift({text,at:new Date().toISOString()});localStorage.setItem('favs',JSON.stringify(a.slice(0,20)));}
+document.addEventListener('DOMContentLoaded',()=>{
+const domainSelect=document.getElementById('domain');if(domainSelect){domains.forEach(d=>{const o=document.createElement('option');o.value=d[0];o.textContent=d[1];domainSelect.appendChild(o);});}
+const tpl=document.getElementById('templates');if(tpl){templates.forEach(t=>{const li=document.createElement('div');li.className='glass card';li.innerHTML=`<h3>${t}</h3><p>قالب جاهز قابل للتخصيص الفوري.</p>`;tpl.appendChild(li);});}
+const form=document.getElementById('generatorForm');if(form){form.addEventListener('submit',e=>{e.preventDefault();const get=id=>document.getElementById(id)?.value||'';const key=get('domain');const domainLabel=domains.find(d=>d[0]===key)?.[1]||'';const v={project:get('project'),domain:domainLabel,domainKey:key,goal:get('goal'),output:get('output'),platform:get('platform'),audience:get('audience'),detail:get('detail'),lang:get('lang'),constraints:get('constraints'),data:get('data'),format:get('format'),explain:get('explain'),verify:get('verify')};const prompt=buildPrompt(v);localStorage.setItem('lastPrompt',prompt);const h=JSON.parse(localStorage.getItem('history')||'[]');h.unshift({project:v.project,domain:v.domain,at:new Date().toLocaleString('ar')});localStorage.setItem('history',JSON.stringify(h.slice(0,10)));location.href='result.html';});}
+const out=document.getElementById('promptOutput');if(out){out.textContent=localStorage.getItem('lastPrompt')||'لم يتم توليد برومبت بعد.';}
+['copyBtn','shortBtn','proBtn','publicBtn','privateBtn','improveBtn','regenBtn'].forEach(id=>{const b=document.getElementById(id);if(b)b.onclick=()=>{let t=localStorage.getItem('lastPrompt')||'';if(id==='shortBtn')t='نسخة مختصرة:\n'+t.slice(0,650);if(id==='proBtn')t='نسخة متقدمة:\n'+t+'\n\nأضف مصفوفة تحقق ومعايير قبول.';if(id==='publicBtn')t=t.replace(/تحذير حقوقي:[\s\S]*?البرومبت الكامل/,'تحذير حقوقي: نسخة للنشر العام مع حفظ الحقوق.\n\nالبرومبت الكامل');if(id==='privateBtn')t=t+'\n\n[نسخة خاصة كاملة تتضمن كل القيود التفصيلية]';if(id==='improveBtn')t=t+'\n\nتحسين تلقائي: رفع الدقة، منع الهلوسة، مراجعة الاتساق.';if(id==='regenBtn')location.reload();if(id==='copyBtn'){navigator.clipboard.writeText(t);}document.getElementById('promptOutput').textContent=t;localStorage.setItem('lastPrompt',t);};});
+const txt=document.getElementById('txtBtn');if(txt)txt.onclick=()=>{const blob=new Blob([localStorage.getItem('lastPrompt')||''],{type:'text/plain'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='alamery-prompt.txt';a.click();};
+const md=document.getElementById('mdBtn');if(md)md.onclick=()=>{const blob=new Blob(['```\n'+(localStorage.getItem('lastPrompt')||'')+'\n```'],{type:'text/markdown'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='alamery-prompt.md';a.click();};
+const fav=document.getElementById('favBtn');if(fav)fav.onclick=()=>saveFav(localStorage.getItem('lastPrompt')||'');
+const hist=document.getElementById('historyList');if(hist){(JSON.parse(localStorage.getItem('history')||'[]')).forEach(i=>{const li=document.createElement('li');li.textContent=`${i.project} — ${i.domain} (${i.at})`;hist.appendChild(li);});}
+const favs=document.getElementById('favList');if(favs){(JSON.parse(localStorage.getItem('favs')||'[]')).forEach(i=>{const li=document.createElement('li');li.textContent=i.text.slice(0,110)+'...';favs.appendChild(li);});}
 });
